@@ -3,7 +3,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Chat from "./pages/Chat";
-
+import { Toaster } from "react-hot-toast";
 const App = () => {
   return (
     <>
@@ -14,6 +14,7 @@ const App = () => {
           <Route path="/chat" element={<Chat />} />
         </Routes>
       </Router>
+      <Toaster />
     </>
   );
 };

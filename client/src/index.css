@@ -17,3 +17,12 @@
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
+
+.form {
+  background: rgb(37, 41, 48);
+  background: linear-gradient(
+    180deg,
+    rgba(37, 41, 48, 1) 4%,
+    rgb(15, 15, 15) 75%
+  );
+}

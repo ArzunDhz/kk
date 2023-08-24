@@ -7,6 +7,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 const API = import.meta.env.VITE_API;
 import { FormSchema } from "../middlewares/ValidateForm";
+import { toast } from "react-hot-toast";
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [isUserRegistered, setIsUserRegistered] = useState(false);
@@ -30,9 +31,9 @@ const Register = () => {
           { withCredentials: true }
         )
         .then((res) => {
-          alert(res.data.message), setIsUserRegistered(true);
+          toast.success(res.data.message), setIsUserRegistered(true);
         })
-        .catch((err) => alert(err.response.data.message));
+        .catch((err) => toast.error(err.response.data.message));
       setLoading(false);
     },
   });
@@ -67,7 +68,7 @@ const Register = () => {
             <div className="">
               <form
                 onSubmit={handleSubmit}
-                className=" shadow-2xl sm:bg-primary form lg:w-[450px] p-[90px] rounded-xl h-[450px] justify-center items-center  bg-secondary flex flex-col space-y-3  "
+                className="  shadow-2xl form lg:w-[450px] p-[90px] rounded-xl h-[450px] justify-center items-center   flex flex-col space-y-3  "
               >
                 <h1 className="text-xl text-pop"> Sign Up </h1>
                 <div className="">

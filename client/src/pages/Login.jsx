@@ -7,6 +7,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 const API = import.meta.env.VITE_API;
 import { FormSchema } from "../middlewares/ValidateForm";
+import { toast } from "react-hot-toast";
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [isUserRegistered, setIsUserRegistered] = useState(false);
@@ -28,9 +29,9 @@ const Register = () => {
           { withCredentials: true }
         )
         .then((res) => {
-          alert(res.data.message), setIsUserRegistered(true);
+          toast.success(res.data.message), setIsUserRegistered(true);
         })
-        .catch((err) => alert(err.response.data.message));
+        .catch((err) => toast.error(err.response.data.message));
       setLoading(false);
     },
   });
@@ -65,7 +66,7 @@ const Register = () => {
             <div className="">
               <form
                 onSubmit={handleSubmit}
-                className=" shadow-2xl sm:bg-primary form lg:w-[450px] p-[90px] rounded-xl h-[450px] justify-center items-center  bg-secondary flex flex-col space-y-3  "
+                className=" shadow-2xl   form lg:w-[450px] p-[90px] rounded-xl h-[450px] justify-center items-center flex flex-col space-y-3  "
               >
                 <h1 className="text-xl text-pop"> Sign In </h1>
 
@@ -103,7 +104,7 @@ const Register = () => {
 
                 <Button text="Sign Up" isLoading={{ loading }} />
 
-                <div className="flex p-2 space-x-4 rounded-full shadow-2xl text-pop bg-primary google_container">
+                <div className="flex p-2 space-x-4 rounded-full bg-primary shadow-5xl text-pop google_container">
                   <img
                     src={GoogleIcon}
                     width={24}
@@ -117,8 +118,8 @@ const Register = () => {
                   <h1>
                     Don't Have Account ?
                     <Link
-                      className="ml-5 text-sm underline cursor-pointer hover:text-white"
-                      to={"/login"}
+                      className="ml-2 text-sm underline cursor-pointer hover:text-white"
+                      to={"/"}
                     >
                       Sign Up
                     </Link>
