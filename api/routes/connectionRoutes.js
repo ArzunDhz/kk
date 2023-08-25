@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.post("/connect/:userId", isUserAuthincated, establishConnnection);
-router.get("/getMyConnection/:userid", isUserAuthincated, getMyConnection);
+router.get("/getMyConnection", isUserAuthincated, getMyConnection);
 
 router.post("/sendMessage", isUserAuthincated, sendMessage);
 router.get("/getMessage/:id", isUserAuthincated, getMessages);

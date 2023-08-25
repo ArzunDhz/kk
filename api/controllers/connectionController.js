@@ -4,7 +4,7 @@ import { MessageSchema } from "../models/messageModal.js";
 
 export const establishConnnection = async (req, res, next) => {
   try {
-    const { sessionUserId } = req.body;
+    const sessionUserId = req.user._id;
     const sessionFriendId = req.params.userId;
 
     const myConversation = await ConnectionSchema.find({
@@ -33,9 +33,12 @@ export const establishConnnection = async (req, res, next) => {
 export const getMyConnection = async (req, res, next) => {
   try {
     const myConversation = await ConnectionSchema.find({
-      members: { $in: [req.params.userid] },
+      members: { $in: [req.user._id] },
     });
-    res.status(200).json(myConversation);
+    res.status(200).json({
+      myId: req.user._id,
+      data: myConversation,
+    });
   } catch (error) {
     next(error);
   }

@@ -37,7 +37,7 @@ export const loginUser = async (req, res, next) => {
 
     sendCookie(res, user, "Logged in", 200);
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -55,7 +55,7 @@ export const logoutUser = async (req, res, next) => {
       message: "Logged Out",
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -68,7 +68,7 @@ export const loginUserInfo = async (req, res, next) => {
       data,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 export const getAllUserInfo = async (req, res, next) => {
@@ -76,7 +76,18 @@ export const getAllUserInfo = async (req, res, next) => {
     const user = await UserSchema.find({ _id: { $ne: req.user._id } });
     res.send(user);
   } catch (error) {
-    console.log(error);
+    next(error);
+  }
+};
+export const getAllUserName = async (req, res, next) => {
+  const serachQuery = req.query.search;
+  if (!serachQuery) return res.json([]);
+  try {
+    const regex = new RegExp(serachQuery, "i");
+    const users = await UserSchema.find({ username: regex }).select("username");
+    res.json(users);
+  } catch (error) {
+    next(error);
   }
 };
 
