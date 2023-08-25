@@ -10,7 +10,6 @@ const MyFriend = () => {
       const { data } = await axios.get(`${API}/getMyConnection`, {
         withCredentials: true,
       });
-      console.log(data.data);
       setMyConversations(data.data);
       setMyId(data.myId);
     };
@@ -18,9 +17,9 @@ const MyFriend = () => {
   }, []);
   return (
     <>
-      <div className="bg-black h-[60px] md:flex  lg:flex-col sm:flex space-x-4  overflow-x-scroll  lg:space-y-4 items-center   lg:h-screen lg:overflow-y-scroll  mt-10">
+      <div className="items-center space-x-4 overflow-x-scroll bg-black h-fit md:flex sm:items-center lg:flex-col sm:flex lg:space-y-4 lg:items-start lg:h-screen lg:overflow-y-scroll">
         {myConversations?.map((conversation) => (
-          <div className="">
+          <div className="mt-4 cursor-pointer">
             <FriendBox data={conversation} myId={myId} />
           </div>
         ))}

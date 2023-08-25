@@ -17,7 +17,13 @@ const FriendBox = ({ data, myId }) => {
 
   return (
     <>
-      <div className="flex justify-center p-1 m-2 rounded-full  bg-slate-600">
+      <div className="flex items-center justify-center sm:flex-col">
+        <div className="flex mt-2  relative justify-center w-[60px] h-[60px] items-center m-2 rounded-full bg-slate-600">
+          <h1 className="text-xl font-bold">
+            {friendDataFromApi?.username.slice(0, 1).toUpperCase()}
+          </h1>
+          <div className="absolute w-4 h-4 bg-red-300 rounded-full left-10 top-10 "></div>
+        </div>
         <h1> {friendDataFromApi?.username} </h1>
       </div>
     </>

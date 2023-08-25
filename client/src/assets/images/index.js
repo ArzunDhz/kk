@@ -1,3 +1,3 @@
 import EarthImg from "./earth.png";
-
-export { EarthImg };
+import HeroImg from "./hero.png";
+export { EarthImg, HeroImg };

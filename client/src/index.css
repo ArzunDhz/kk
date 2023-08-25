@@ -18,6 +18,14 @@
   background-clip: padding-box, border-box;
 }
 
+.ok {
+  border: double 1px transparent;
+  border-radius: 10px;
+  background-image: linear-gradient(#222529, rgb(25, 30, 24)),
+    linear-gradient(to right, rgb(24, 255, 12), rgb(121, 157, 113));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
 .form {
   background: rgb(37, 41, 48);
   background: linear-gradient(
@@ -25,4 +33,8 @@
     rgba(37, 41, 48, 1) 4%,
     rgb(15, 15, 15) 75%
   );
+}
+
+::-webkit-scrollbar {
+  width: 0%;
 }
