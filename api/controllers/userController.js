@@ -94,10 +94,8 @@ export const getAllUserName = async (req, res, next) => {
 export const getUserInfo = async (req, res, next) => {
   try {
     const { userid } = req.params;
-    console.log(userid);
     const user = await UserSchema.findById(userid);
     if (!user) return next(new ErrorHandler("Usernot Found", 404));
-    console.log(user);
     res.send(user);
   } catch (error) {
     next(error);

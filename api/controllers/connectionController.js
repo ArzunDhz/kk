@@ -13,18 +13,39 @@ export const establishConnnection = async (req, res, next) => {
         { members: { $in: sessionFriendId } },
       ],
     });
-    if (myConversation.length > 0)
-      return res.json({ message: "Already added" });
+    if (myConversation.length > 0) {
+      const deleteUser = await ConnectionSchema.findById(myConversation[0]._id);
+      deleteUser.deleteOne();
+      return res.json({ message: "UnFriend" });
+    }
 
     const newConnection = new ConnectionSchema({
       members: [sessionUserId, sessionFriendId],
     });
     const saveConverstion = await newConnection.save();
     res.json({
-      message: `added your id = ${sessionUserId} with ${sessionFriendId}`,
+      message: `Added`,
       success: true,
       saveConverstion,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+export const checkIfFriend = async (req, res, next) => {
+  try {
+    const sessionUserId = req.user._id;
+    const sessionFriendId = req.params.userId;
+
+    const myConversation = await ConnectionSchema.find({
+      $and: [
+        { members: { $in: sessionUserId } },
+        { members: { $in: sessionFriendId } },
+      ],
+    });
+    if (myConversation.length > 0)
+      return res.json({ message: "Already added", added: true });
+    else return res.json({ message: "Not added", added: false });
   } catch (error) {
     next(error);
   }
@@ -68,6 +89,7 @@ export const getMessages = async (req, res, next) => {
     res.json({
       message: "Fetched",
       success: true,
+      currentUser: req.user._id,
       getMessage,
     });
   } catch (error) {
